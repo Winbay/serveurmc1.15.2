@@ -13,6 +13,11 @@ repositories {
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     mavenLocal() // This is needed for CraftBukkit and Spigot.
 }
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 
 dependencies {
     // Pick only one of these and read the comment in the repositories block.
