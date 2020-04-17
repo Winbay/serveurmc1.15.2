@@ -1,0 +1,4 @@
+name: WinbayPlugin
+version: 1.0
+author: Akami, Winbay
+main: net.akabay.mcserver.core.MainPlugin

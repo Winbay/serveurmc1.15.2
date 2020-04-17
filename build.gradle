@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'net.akabay.mcserver'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    mavenLocal() // This is needed for CraftBukkit and Spigot.
+}
+
+dependencies {
+    // Pick only one of these and read the comment in the repositories block.
+    compileOnly 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+}
