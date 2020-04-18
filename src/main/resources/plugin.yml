@@ -1,5 +1,26 @@
 name: WinbayPlugin
 description: Plugin for winbay's server
 version: 1.0
-author: [Akami, Winbay]
+author: Akami, Winbay
 main: net.akabay.mcserver.core.MainPlugin
+
+commands:
+  invsee:
+    permission: admin.use
+    description: to see and modify  the inventory of a player
+    usage: /invsee
+
+  armorsee:
+    permission: admin.use
+    description: to see the armor of a player
+    usage: /armorsee
+
+  enderchestsee:
+    permission: admin.use
+    description: to see the enderchest of a player
+    usage: /enderchestsee
+
+  gm:
+    permission: admin.use
+    description: To set your gamemode faster
+    usage: /gm
