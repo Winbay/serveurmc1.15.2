@@ -1,13 +1,24 @@
 package net.akabay.mcserver.core;
 
 import net.akabay.mcserver.listeners.JoinLeaveListener;
+import net.akabay.mcserver.reward.JoinReward;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
 
 public class MainPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
         System.out.println("Plugin successfully enabled");
-        getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
+        register(new JoinLeaveListener(), new JoinReward());
+    }
+
+    private void register(Listener... listeners) {
+        PluginManager manager = getServer().getPluginManager();
+        for(Listener listener : listeners) {
+            manager.registerEvents(listener, this);
+        }
     }
 }

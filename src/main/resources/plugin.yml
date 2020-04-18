@@ -1,0 +1,5 @@
+name: WinbayPlugin
+description: Plugin for winbay's server
+version: 1.0
+author: [Akami, Winbay]
+main: net.akabay.mcserver.core.MainPlugin
