@@ -23,3 +23,4 @@ dependencies {
     // Pick only one of these and read the comment in the repositories block.
     compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
 }
+
