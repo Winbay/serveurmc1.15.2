@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class JoinReward implements StandardGameReward {
+public class FirstJoinReward implements StandardGameReward {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -13,7 +13,7 @@ public class JoinReward implements StandardGameReward {
 
     @Override
     public boolean appliesTo(Player target) {
-        return target.getDisplayName().equals("Askigh");
+        return !target.hasPlayedBefore();
     }
 
     @Override
