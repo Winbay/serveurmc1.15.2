@@ -8,6 +8,7 @@ public class MainPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         System.out.println("Plugin successfully enabled");
+
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
     }
 }
