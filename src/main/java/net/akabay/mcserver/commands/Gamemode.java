@@ -13,23 +13,7 @@ public class Gamemode implements CommandExecutor {
         int n = args.length;
         if (n > 0 && sender instanceof Player) {
             Player player = (Player) sender;
-            GameMode gm;
-            switch (args[0]){
-                case "0":
-                    gm = GameMode.SURVIVAL;
-                    break;
-                case "1":
-                    gm = GameMode.CREATIVE;
-                    break;
-                case "2":
-                    gm = GameMode.ADVENTURE;
-                    break;
-                case "3":
-                    gm = GameMode.SPECTATOR;
-                    break;
-                default:
-                    return false;
-            }
+            GameMode gm = findGameMode(args[0]);
             if (n == 1) {
                 player.setGameMode(gm);
                 return true;
@@ -42,5 +26,18 @@ public class Gamemode implements CommandExecutor {
             }
         }
         return false;
+    }
+
+    public GameMode findGameMode(String arg){
+        switch (arg){
+            case "0":
+                return GameMode.SURVIVAL;
+            case "1":
+                return GameMode.CREATIVE;
+            case "2":
+                return GameMode.ADVENTURE;
+            default:
+                return GameMode.SPECTATOR;
+        }
     }
 }

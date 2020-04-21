@@ -24,3 +24,8 @@ commands:
     permission: admin.use
     description: To set your gamemode faster
     usage: /gm
+
+  shop:
+    permission: admin.use
+    description: To open the shop
+    usage: /shop
