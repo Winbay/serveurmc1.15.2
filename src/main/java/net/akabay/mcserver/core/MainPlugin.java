@@ -4,6 +4,7 @@ import net.akabay.mcserver.commands.ArmorSee;
 import net.akabay.mcserver.commands.EnderChestSee;
 import net.akabay.mcserver.commands.Gamemode;
 import net.akabay.mcserver.commands.InvSee;
+import net.akabay.mcserver.listeners.DeathInventoryListener;
 import net.akabay.mcserver.listeners.JoinLeaveListener;
 import net.akabay.mcserver.reward.FirstJoinReward;
 import org.bukkit.event.Listener;
@@ -21,7 +22,7 @@ public class MainPlugin extends JavaPlugin {
         this.getCommand("armorsee").setExecutor(new ArmorSee());
         this.getCommand("enderchestsee").setExecutor(new EnderChestSee());
         this.getCommand("gm").setExecutor(new Gamemode());
-        register(new JoinLeaveListener(), new FirstJoinReward());
+        register(new JoinLeaveListener(), new FirstJoinReward(), new DeathInventoryListener());
     }
 
     private void register(Listener... listeners) {
