@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class FirstJoinReward implements StandardGameReward {
+public class FirstJoinReward implements StandardGameReward<PlayerJoinEvent> {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -17,7 +17,7 @@ public class FirstJoinReward implements StandardGameReward {
     }
 
     @Override
-    public int getAmount() {
+    public int getAmount(PlayerJoinEvent event) {
         return 20;
     }
 }

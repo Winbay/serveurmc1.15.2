@@ -7,28 +7,31 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Gamemode implements CommandExecutor {
+public class GamemodeCommand implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         int n = args.length;
-        if (n > 0 && sender instanceof Player) {
-            Player player = (Player) sender;
-            GameMode gm = findGameMode(args[0]);
-            if (n == 1) {
-                player.setGameMode(gm);
-                return true;
-            }
-            for (Player newPlayer : Bukkit.getOnlinePlayers()) {
-                if (args[1].equals(newPlayer.getDisplayName())) {
-                        newPlayer.setGameMode(gm);
-                        return true;
-                }
+        if(n == 0 || !(sender instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) sender;
+        GameMode gm = findGameMode(args[0]);
+        if (n == 1) {
+            player.setGameMode(gm);
+            return true;
+        }
+        for (Player newPlayer : Bukkit.getOnlinePlayers()) {
+            if (args[1].equals(newPlayer.getDisplayName())) {
+                    newPlayer.setGameMode(gm);
+                    return true;
             }
         }
         return false;
     }
 
-    public GameMode findGameMode(String arg){
+    private GameMode findGameMode(String arg){
         switch (arg){
             case "0":
                 return GameMode.SURVIVAL;
