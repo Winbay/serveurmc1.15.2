@@ -16,7 +16,6 @@ public class ArmorSee implements CommandExecutor {
         if (args.length == 0 || !(sender instanceof Player)) {
             return false;
         }
-
         Player player = (Player) sender;
         for (Player newPlayer : Bukkit.getOnlinePlayers()) {
             if (!args[0].equals(newPlayer.getDisplayName())) {

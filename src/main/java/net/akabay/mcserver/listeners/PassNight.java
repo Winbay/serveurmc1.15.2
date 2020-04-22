@@ -16,11 +16,11 @@ public class PassNight implements Listener {
     public void onPlayerBedEnter(PlayerBedEnterEvent event){
         if(!event.isCancelled()) {
             nWantsToSleep++;
-            passNight(event);
             Player player = event.getPlayer();
             player.getServer().broadcastMessage(ChatColor.AQUA +"[Bed] " + player.getDisplayName() +
                     " souhaite dormir. " +nWantsToSleep+ " / " +
                     player.getWorld().getPlayers().size()/2);
+            passNight(event);
         }
     }
 
