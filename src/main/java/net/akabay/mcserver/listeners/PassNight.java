@@ -19,19 +19,22 @@ public class PassNight implements Listener {
     public void onPlayerBedEnter(PlayerBedEnterEvent event){
         if(!event.isCancelled()) {
             nWantsToSleep++;
-            passNight(event);
-            event.getPlayer().getServer().broadcastMessage(ChatColor.AQUA +"[Bed] " + event.getPlayer().getDisplayName() +
+            Player player = event.getPlayer();
+            player.getServer().broadcastMessage(ChatColor.AQUA +"[Bed] " + player.getDisplayName() +
                     " souhaite dormir. " +nWantsToSleep+ " / " +
-                    event.getPlayer().getWorld().getPlayers().size()/2);
+                    player.getWorld().getPlayers().size()/2);
+            passNight(event);
         }
     }
 
     @EventHandler
     public void onPlayerBedLeaveEvent(PlayerBedLeaveEvent event){
         nWantsToSleep--;
-        event.getPlayer().getServer().broadcastMessage(ChatColor.DARK_AQUA +"[Bed] " +event.getPlayer().getDisplayName() +
+        Player player = event.getPlayer();
+        player.getServer().broadcastMessage(ChatColor.DARK_AQUA +"[Bed] " + player.getDisplayName() +
                 " s'est reveille. " +nWantsToSleep+ " / " +
-                event.getPlayer().getWorld().getPlayers().size()/2);
+                player.getWorld().getPlayers().size()/2);
+
     }
 
     public void passNight(PlayerBedEnterEvent event){

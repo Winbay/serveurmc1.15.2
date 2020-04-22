@@ -25,6 +25,7 @@ public class Shop implements CommandExecutor {
             Player player = (Player) sender;
             createInventoryShop(player);
             player.openInventory(inventory);
+            return true;
         }
         return false;
     }
