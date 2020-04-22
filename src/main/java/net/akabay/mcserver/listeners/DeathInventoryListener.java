@@ -19,24 +19,28 @@ public class DeathInventoryListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
+
         Player player = event.getEntity();
         World world = player.getWorld();
         GameRule<Boolean> keepInventory = GameRule.KEEP_INVENTORY;
-        Boolean initialInventoryRule = world.getGameRuleValue(keepInventory);
-        if(initialInventoryRule == null) {
-            initialInventoryRule = false;
-        }
+
+        boolean initialInventoryRule = Optional.ofNullable(world.getGameRuleValue(keepInventory)).orElse(false);
         world.setGameRule(keepInventory, true);
 
-        Location deathLoc = player.getLocation();
+        organizeItems(player);
+
+        world.setGameRule(keepInventory, initialInventoryRule);
+    }
+
+    private void organizeItems(Player player) {
+
         Queue<ItemStack> contents = getContentsAsQueue(player);
+        Location deathLoc = player.getLocation();
 
         while(!storeContents(contents, deathLoc.add(0, 1, 0))) { }
 
         player.getInventory().clear();
         provideDeathLocation(player, deathLoc);
-
-        world.setGameRule(keepInventory, initialInventoryRule);
     }
 
     private void provideDeathLocation(Player player, Location loc) {
@@ -49,20 +53,20 @@ public class DeathInventoryListener implements Listener {
     }
 
     /**
-     *
      * @param contents the contents to fit in chests
      * @param location where the current chest should be placed
      * @return whether the queue has been emptied or not
      */
     private boolean storeContents(Queue<ItemStack> contents, Location location) {
 
-        if(contents.size() == 0) return true;
+        if(contents.size() == 0) return true; // In case the player dies with an empty inventory, so that we avoid generating an empty chest
 
         Block block = location.getBlock();
         if(block.getType() != Material.AIR && location.getY() < 255) {
-            System.out.println("Hit a block of " + block.getType() + " at height " + location.getY());
+            // We don't want to fall here if we're too close to the height limit, going any higher might cause errors
             return false;
         }
+
         block.setType(Material.CHEST);
         Chest newBlock = (Chest) location.getBlock().getState();
         Inventory blockInventory = newBlock.getBlockInventory();
@@ -81,10 +85,9 @@ public class DeathInventoryListener implements Listener {
         list.addAll(Arrays.asList(inv.getArmorContents()));
         list.addAll(Arrays.asList(inv.getExtraContents()));
         list.addAll(Arrays.asList(inv.getStorageContents()));
-        list = list
+        return list
                 .stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(LinkedList::new));
-        return list;
     }
 }

@@ -12,15 +12,20 @@ public interface GameReward<T extends Event> extends Listener {
 
     Player getFromEvent(T event);
     boolean appliesTo(Player target);
-    int getAmount();
+    int getAmount(T event);
 
     default void grant(T event) {
         Player player = getFromEvent(event);
-        if(appliesTo(player)) {
-            ItemStack clone = MONEY.clone();
-            clone.setAmount(getAmount());
-            player.getInventory().addItem(clone);
-            player.sendMessage("You have been granted " + getAmount() + " coins!");
+        if (!appliesTo(player)) {
+            return;
         }
+        ItemStack clone = MONEY.clone();
+        int amount = getAmount(event);
+        if(amount == 0) return;
+
+        clone.setAmount(amount);
+        player.getInventory().addItem(clone);
+        player.sendMessage("You have been granted " + amount + " coins!");
+
     }
 }

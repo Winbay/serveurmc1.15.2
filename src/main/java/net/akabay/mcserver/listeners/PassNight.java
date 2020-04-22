@@ -1,7 +1,6 @@
 package net.akabay.mcserver.listeners;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,11 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
 
-import java.util.Collection;
-
 public class PassNight implements Listener {
 
-    int nWantsToSleep = 0;
+    private int nWantsToSleep = 0;
 
     @EventHandler
     public void onPlayerBedEnter(PlayerBedEnterEvent event){
@@ -34,10 +31,9 @@ public class PassNight implements Listener {
         player.getServer().broadcastMessage(ChatColor.DARK_AQUA +"[Bed] " + player.getDisplayName() +
                 " s'est reveille. " +nWantsToSleep+ " / " +
                 player.getWorld().getPlayers().size()/2);
-
     }
 
-    public void passNight(PlayerBedEnterEvent event){
+    private void passNight(PlayerBedEnterEvent event){
         World world = event.getPlayer().getWorld();
         int nOnlinePlayers = world.getPlayers().size();
         if(nOnlinePlayers/2 <= nWantsToSleep){
